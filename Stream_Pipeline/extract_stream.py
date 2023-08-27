@@ -12,7 +12,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] ='/content/sample_data/key.json'
 
 def push_pubsub(message):
     publisher = pubsub_v1.PublisherClient()
-    topic_id = 'projects/qwiklabs-gcp-03-5dd28b2355fe/topics/dataflow-pubsub'
+    topic_id = 'projects/project_id/topics/dataflow-pubsub'
 
     data = message.encode('utf-8')
     future = publisher.publish(topic_id, data)

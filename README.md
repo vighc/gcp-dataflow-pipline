@@ -37,6 +37,8 @@ Leveraging Dataflow's capabilities, a batch pipeline is established to process t
 ### Warehousing and Visualization
 The transformed data resides in Google BigQuery, serving as a centralized repository for historical insights. Visualization is powered by Looker Studio, offering interactive dashboards that reveal the compelling story of COVID-19 trends over time.
 
+![India](India.png) ![Country](Country.png)
+
 By integrating both streaming and batch pipelines, this project provides a comprehensive approach to COVID-19 data management. From real-time monitoring to historical analysis, the dynamic perspectives offered are invaluable.
 
 Stay tuned for updates as I continue to explore the data landscape! 🌟📈

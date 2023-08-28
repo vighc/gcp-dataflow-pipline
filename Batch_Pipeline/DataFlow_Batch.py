@@ -10,6 +10,9 @@ class MyPipelineOptions(PipelineOptions):
        # Add your pipeline-specific command line arguments here
        pass
 
+def process_pubsub(element):
+   return element['name']
+
 def process_element(element):
    # Define your data processing logic here
    element = element.decode('utf-8')
@@ -22,10 +25,12 @@ def run(args):
     table_spec = args.project+':dataflow_dataset.covid_table'
     table_schema = 'Country:STRING, TotalCases:STRING, NewCases:STRING, TotalDeaths:STRING, NewDeaths:STRING, TotalRecovered:STRING, NewRecovered:STRING, ActiveCases:STRING, Serious_Critical:STRING, TotalCases 1M:STRING, Deaths:STRING, TotalTests:STRING, Tests:STRING, Population:STRING, Continent:STRING, 1 Caseevery X ppl:STRING, 1 Deathevery X ppl:STRING, 1 Testevery X ppl:STRING, New Cases:STRING, New Deaths:STRING, Active Cases:STRING'
 
-    pipeline_options = MyPipelineOptions()
+    pipeline_options = MyPipelineOptions(streaming=True)
     with beam.Pipeline(options=pipeline_options) as p:
         (p
-        | "Read Data" >> beam.io.ReadFromText(args.filename,skip_header_lines=1)
+        | "Read from Pub/Sub" >> beam.io.ReadFromPubSub(subscription="projects/"+args.project+"/subscriptions/dataflow-pubsub-sub")
+        | "Process Data" >> beam.Map(process_pubsub)
+        | "Read Files" >> beam.io.ReadAllFromText(skip_header_lines=1)
         | "Process Data" >> beam.Map(process_element)
         | "Load Data" >> beam.io.WriteToBigQuery(
                             table_spec,

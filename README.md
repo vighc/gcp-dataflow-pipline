@@ -10,7 +10,7 @@ Welcome to my Dataflow Data Pipeline project! 🌐📊 This project aims to capt
 Live COVID-19 data is systematically extracted from the Worldometer website at one-minute intervals, ensuring a continuous and up-to-date stream of information.
 
 ### Data Publishing
-The extracted data is instantly published to Google Cloud Pub/Sub using Google Colab, enabling seamless and real-time data distribution.
+The extracted data is instantly published to Google Cloud Pub/Sub using Google Compute Engine, enabling seamless and real-time data distribution.
 
 ### DataFlow Streaming Pipeline
 Leveraging the capabilities of Google Dataflow, a dedicated streaming pipeline is established to efficiently ingest, process, and transform the data from Pub/Sub. This ensures optimal real-time data management.
@@ -26,7 +26,7 @@ Through this streaming pipeline, the project enables continuous data acquisition
 Daily snapshots of live COVID-19 data are captured from the Worldometer website, creating a comprehensive dataset reflecting daily pandemic statistics.
 
 ### Data Organization and Publishing
-These snapshots are meticulously structured into CSV files and pushed to a designated Google Cloud Storage (GCS) bucket using Google Colab. The process triggers a Pub/Sub notification, marking the arrival of new insights.
+These snapshots are meticulously structured into CSV files and pushed to a designated Google Cloud Storage (GCS) bucket using Google Compute Engine. The process triggers a Pub/Sub notification, marking the arrival of new insights.
 
 ### Crontab Scheduling
 With the precision of Crontab scheduling, a daily task extracts the CSV filename from the Pub/Sub message, initiating seamless data transformation.
